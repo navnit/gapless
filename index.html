@@ -139,6 +139,14 @@
     },
     {
       "@type": "Question",
+      "name": "Why does macOS say Gapless can't be opened or might harm my Mac?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because Gapless is not yet notarized by Apple. Notarizing an app, and the Developer ID certificate it requires, means enrolling in Apple's Developer Program at $99 a year, and Gapless is a free open-source project. The app is safe: every line of its source is public and each DMG is SHA-256 verified. On first launch, approve it once via System Settings → Privacy & Security → Open Anyway. Apps installed with Homebrew open without any prompt."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Can I keep pauses I want instead of cutting everything?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -473,6 +481,10 @@
         <details class="faq__item">
           <summary class="faq__q">What operating systems does Gapless support?<span class="faq__sign" aria-hidden="true"></span></summary>
           <p class="faq__a">Gapless runs on macOS 12 or later, on both Apple Silicon and Intel Macs. Windows and Linux versions are coming soon.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Why does macOS say Gapless can't be opened or might harm my Mac?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">Because Gapless is not yet notarized by Apple. Notarizing an app, and the Developer ID certificate it requires, means enrolling in Apple's Developer Program at $99 a year, and Gapless is a free open-source project. The app is safe: every line of its source is public and each DMG is SHA-256 verified. On first launch, approve it once via System Settings → Privacy &amp; Security → Open Anyway. Apps installed with Homebrew open without any prompt.</p>
         </details>
         <details class="faq__item">
           <summary class="faq__q">Can I keep pauses I want instead of cutting everything?<span class="faq__sign" aria-hidden="true"></span></summary>
