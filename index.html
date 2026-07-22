@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=2" />
+<link rel="stylesheet" href="assets/styles.css?v=3" />
 <script>
   // Set theme before first paint to avoid a flash of the wrong theme.
   (function () {
@@ -127,7 +127,13 @@
         </div>
         <div class="app__timeline">
           <div class="wave" data-wave="hero" aria-hidden="true"></div>
-          <div class="app__timelineFoot mono"><span>38 cuts proposed <b>·</b> 22:14</span><span class="app__saved">Saved</span></div>
+          <div class="app__timelineFoot mono">
+            <span class="xfade">
+              <span class="xfade__a">38 cuts proposed <b>·</b> 22:14</span>
+              <span class="xfade__b accent">38 cuts applied <b>·</b> 9:40 (−12:34)</span>
+            </span>
+            <span class="app__saved">Saved</span>
+          </div>
         </div>
       </div>
 
@@ -203,8 +209,10 @@
           <p class="feature__body">Pause between sentences. Check your notes. Re-find your cursor. Record naturally — then set the threshold and everything quieter than it gets trimmed, with a margin around every cut so the edit breathes.</p>
         </div>
         <figure class="viz">
-          <div class="wave wave--sm wave--threshold" data-wave="tutorial" aria-hidden="true">
-            <span class="wave__thresholdLabel mono">cut below <b class="accent">−19 dB</b></span>
+          <div class="viz-thr" aria-hidden="true">
+            <div class="wave wave--tall" data-wave="tutorial"></div>
+            <div class="wave-thr__line"></div>
+            <div class="wave-thr__label mono">cut below <span class="wave-thr__db"><span class="out">−32 dB</span><span class="in">−19 dB</span></span></div>
           </div>
           <figcaption class="viz__foot mono"><span>setup-tutorial.mp4</span><span><span class="dim">14:32</span> → <span class="accent">11:05</span></span></figcaption>
         </figure>
@@ -218,13 +226,13 @@
         </div>
         <figure class="viz">
           <div class="convo" aria-hidden="true">
-            <span class="convo__bubble">YOU</span>
-            <span class="convo__gap"></span>
-            <span class="convo__bubble">GUEST</span>
-            <span class="convo__gap"></span>
-            <span class="convo__bubble">YOU</span>
-            <span class="convo__gap"></span>
-            <span class="convo__bubble">GUEST</span>
+            <span class="convo__talk convo__talk--you" style="width:60px">YOU</span>
+            <span class="convo__pause" style="--w:70px"><i></i><b></b><i></i></span>
+            <span class="convo__talk" style="width:90px">GUEST</span>
+            <span class="convo__pause" style="--w:50px"><i></i><b></b><i></i></span>
+            <span class="convo__talk convo__talk--you" style="width:50px">YOU</span>
+            <span class="convo__pause" style="--w:60px"><i></i><b></b><i></i></span>
+            <span class="convo__talk" style="width:70px">GUEST</span>
           </div>
           <figcaption class="viz__foot mono"><span>ep-41-interview.mp4 <b>·</b> <span class="accent">amber ticks</span> = kept margin</span><span><span class="dim">58:20</span> → <span class="accent">46:41</span></span></figcaption>
         </figure>
@@ -238,11 +246,11 @@
         </div>
         <figure class="viz">
           <div class="ffwd" aria-hidden="true">
-            <span class="ffwd__seg"></span>
-            <span class="ffwd__seg ffwd__seg--fast"><b class="mono">8×</b></span>
-            <span class="ffwd__seg"></span>
-            <span class="ffwd__seg ffwd__seg--fast"><b class="mono">8×</b></span>
-            <span class="ffwd__seg"></span>
+            <span class="ffwd__seg" style="width:100px"></span>
+            <span class="ffwd__seg ffwd__seg--fast" style="width:80px"><b class="mono">8×</b></span>
+            <span class="ffwd__seg" style="width:120px"></span>
+            <span class="ffwd__seg ffwd__seg--fast" style="width:70px"><b class="mono">8×</b></span>
+            <span class="ffwd__seg" style="width:88px"></span>
             <span class="ffwd__playhead"></span>
           </div>
           <figcaption class="viz__foot mono"><span>lecture-week-6.mp4 <b>·</b> nothing deleted</span><span><span class="dim">52:00</span> → <span class="accent">33:15</span></span></figcaption>
@@ -356,6 +364,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=2"></script>
+<script src="assets/app.js?v=3"></script>
 </body>
 </html>

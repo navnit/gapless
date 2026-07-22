@@ -95,45 +95,59 @@
   }
 
   /* ---------- Waveform builder ----------
-     patterns describe alternating "kept" and "cut" runs so the
-     bars read the way the timeline does in the app. */
-  var PATTERNS = {
-    hero:     { seed: 7,  bars: 68, runs: [9, 4, 12, 5, 10, 6, 11, 5] },
-    meetings: { seed: 21, bars: 58, runs: [7, 6, 10, 7, 9, 5, 8] },
-    tutorial: { seed: 33, bars: 56, threshold: true }
+     Segmented like the app timeline: tall "speech" runs are kept,
+     flat "gap" runs are hatched and collapse to zero (the cut being
+     applied), "quiet" runs carry a hatch that fades in as the
+     threshold sweeps. Widths are n*5px so the bar count sets the span. */
+  var WAVES = {
+    hero:     { seed: 7,  dur: '10s', spec: [['s', 20], ['g', 14], ['s', 26], ['g', 10], ['s', 22], ['g', 22], ['s', 26], ['g', 8], ['s', 20], ['g', 16], ['s', 18]] },
+    meetings: { seed: 11, dur: '9s',  spec: [['s', 10], ['g', 8], ['s', 14], ['g', 26, 'app processing · 46s'], ['s', 12], ['g', 8], ['s', 10]] },
+    tutorial: { seed: 23, spec: [['s', 14], ['g', 11], ['s', 16], ['q', 14], ['s', 14], ['q', 8], ['s', 14]] }
   };
 
+  function barHeight(type, r) {
+    if (type === 's') return 38 + r() * 54; // speech: tall
+    if (type === 'q') return 28 + r() * 14; // quiet: medium
+    return 3 + r() * 7;                     // gap: near-flat silence
+  }
+
   function buildWave(el) {
-    var name = el.getAttribute('data-wave');
-    var cfg = PATTERNS[name] || PATTERNS.hero;
-    var rnd = seeded(cfg.seed);
+    var cfg = WAVES[el.getAttribute('data-wave')];
+    if (!cfg) return;
+    var r = seeded(cfg.seed);
     var frag = document.createDocumentFragment();
 
-    // Precompute which bars belong to a "cut" run.
-    var cutFlags = new Array(cfg.bars).fill(false);
-    if (cfg.runs) {
-      var idx = 0, cut = false;
-      for (var r = 0; r < cfg.runs.length && idx < cfg.bars; r++) {
-        for (var k = 0; k < cfg.runs[r] && idx < cfg.bars; k++) { cutFlags[idx++] = cut; }
-        cut = !cut;
-      }
-      while (idx < cfg.bars) { cutFlags[idx++] = cut; }
-    }
+    cfg.spec.forEach(function (item) {
+      var type = item[0], n = item[1], tag = item[2];
+      var w = (n * 5) + 'px';
+      var isCut = type === 'g';
+      var seg = document.createElement('span');
+      seg.className = 'wave__seg' + (isCut ? ' wave__seg--cut' : '');
+      seg.style.setProperty('--w', w);
+      seg.style.width = w;
+      if (isCut && cfg.dur) seg.style.setProperty('--anim', 'gpCollapse ' + cfg.dur + ' ease-in-out infinite');
 
-    for (var i = 0; i < cfg.bars; i++) {
-      var bar = document.createElement('span');
-      bar.className = 'wave__bar';
-      var base = cfg.threshold ? rnd() : (cutFlags[i] ? 0.18 + rnd() * 0.35 : 0.35 + rnd() * 0.65);
-      var h = Math.max(0.08, Math.min(1, base));
-      bar.style.height = (h * 100) + '%';
-      if (cfg.threshold) {
-        // bars quieter than the dashed threshold line are dimmed (they get cut)
-        if (h < 0.54) { bar.classList.add('below'); }
-      } else if (cutFlags[i]) {
-        bar.classList.add('is-cut');
+      var bars = document.createElement('span');
+      bars.className = 'wave__bars';
+      bars.style.width = w;
+      for (var i = 0; i < n; i++) {
+        var b = document.createElement('span');
+        b.className = 'wave__bar';
+        b.style.height = Math.max(6, Math.min(100, barHeight(type, r))) + '%';
+        bars.appendChild(b);
       }
-      frag.appendChild(bar);
-    }
+      seg.appendChild(bars);
+
+      if (isCut) {
+        var h = document.createElement('span'); h.className = 'wave__hatch'; seg.appendChild(h);
+      } else if (type === 'q') {
+        var hb = document.createElement('span'); hb.className = 'wave__hatch wave__hatch--anim'; seg.appendChild(hb);
+      }
+      if (tag) {
+        var t = document.createElement('span'); t.className = 'wave__tag mono'; t.textContent = tag; seg.appendChild(t);
+      }
+      frag.appendChild(seg);
+    });
     el.appendChild(frag);
   }
 
