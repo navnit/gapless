@@ -164,18 +164,19 @@
     return /mac/i.test(p);
   }
 
-  // Best-effort: 'arm64' | 'x64' | null
+  // Best-effort: 'arm64' | 'x64' | null. Never rejects — a blocked
+  // client-hint API (Permissions-Policy on some hosts) must not break downloads.
   function detectArch() {
-    return Promise.resolve().then(function () {
-      if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
-        return navigator.userAgentData.getHighEntropyValues(['architecture'])
-          .then(function (h) {
-            if (h && h.architecture) return h.architecture === 'arm' ? 'arm64' : 'x64';
-            return webglArch();
-          })
-          .catch(webglArch);
-      }
-      return webglArch();
+    return new Promise(function (resolve) {
+      try {
+        if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+          navigator.userAgentData.getHighEntropyValues(['architecture']).then(function (h) {
+            resolve(h && h.architecture ? (h.architecture === 'arm' ? 'arm64' : 'x64') : webglArch());
+          }, function () { resolve(webglArch()); });
+          return;
+        }
+      } catch (e) {}
+      resolve(webglArch());
     });
   }
   function webglArch() {
@@ -212,7 +213,8 @@
     return null;
   }
 
-  Promise.all([isMac() ? detectArch() : Promise.resolve(null), fetchRelease()])
+  var archP = Promise.resolve(isMac() ? detectArch() : null).catch(function () { return null; });
+  Promise.all([archP, fetchRelease()])
     .then(function (out) {
       var arch = out[0], rel = out[1];
       var downloads = document.querySelectorAll('.js-download');
@@ -242,5 +244,6 @@
         altEl.href = dmg[other];
         altEl.hidden = false;
       }
-    });
+    })
+    .catch(function () { /* keep the hardcoded fallbacks */ });
 })();
