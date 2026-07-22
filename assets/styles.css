@@ -395,6 +395,24 @@ code, .mono { font-family: var(--font-mono); }
 .spec__row dt { color: var(--dim); margin: 0; }
 .spec__row dd { margin: 0; color: var(--text); text-align: right; }
 
+/* ---------- FAQ ---------- */
+.faq { max-width: 800px; margin-inline: auto; display: flex; flex-direction: column; gap: 0.8rem; }
+.faq__item { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); transition: border-color 0.25s var(--ease); }
+.faq__item[open] { border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+.faq__q { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; padding: 1.15rem 1.5rem; font-size: 1.08rem; font-weight: 600; letter-spacing: -0.015em; transition: color 0.2s var(--ease); }
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:hover { color: var(--accent); }
+/* + / − toggle: the vertical bar collapses when the item is open */
+.faq__sign { flex: none; position: relative; width: 15px; height: 15px; margin-top: 0.15rem; }
+.faq__sign::before, .faq__sign::after { content: ''; position: absolute; background: var(--accent); border-radius: 2px; transition: transform 0.25s var(--ease); }
+.faq__sign::before { top: 6.5px; left: 0; width: 15px; height: 2px; }
+.faq__sign::after { top: 0; left: 6.5px; width: 2px; height: 15px; }
+.faq__item[open] .faq__sign::after { transform: scaleY(0); }
+.faq__a { color: var(--muted); margin: 0; padding: 0 1.5rem 1.35rem; font-size: 1rem; max-width: 64ch; }
+@media (prefers-reduced-motion: reduce) {
+  .faq__item, .faq__q, .faq__sign::before, .faq__sign::after { transition: none !important; }
+}
+
 /* ============================================================
    FINAL CTA
    ============================================================ */

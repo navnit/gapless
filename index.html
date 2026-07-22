@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=5" />
+<link rel="stylesheet" href="assets/styles.css?v=6" />
 <script>
   // Set theme before first paint to avoid a flash of the wrong theme.
   (function () {
@@ -80,6 +80,72 @@
     "name": "Navnit Durai",
     "url": "https://navnit.me"
   }
+}
+</script>
+
+<!-- FAQ structured data — answer text mirrors the visible #faq section verbatim -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Gapless free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Gapless is free and open-source under the GPL-3.0 license. There is no account to create, no watermark on your exports, and no paid tier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Gapless upload my videos to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything runs locally on your own machine. Your files never leave your device and no network connection is required, even for the first launch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Gapless remove silence from a video?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gapless scans the audio and proposes a cut wherever the sound drops below a threshold you set. Every proposed cut appears on a visual timeline, so you can review them, keep any you want, and export a tighter MP4."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is Gapless different from auto-editor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gapless is the visual interface for the auto-editor engine, which it bundles in, version-pinned and checksum-verified. You get a timeline to review and adjust every cut, with no Python to install and no command line to learn."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Gapless change my original file?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The edit is completely non-destructive. Your original file stays read-only and Gapless writes the result to a separate MP4 that matches exactly what the Edited preview showed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What operating systems does Gapless support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gapless runs on macOS 12 or later, on both Apple Silicon and Intel Macs. Windows and Linux versions are coming soon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I keep pauses I want instead of cutting everything?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Click any proposed cut to restore that section, adjust the margin kept on both sides of every cut, or switch from cutting to fast-forwarding, which plays silent stretches at 8× instead of removing them."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -372,6 +438,46 @@
           <div class="spec__row"><dt>dependencies</dt><dd>none, bundled in</dd></div>
           <div class="spec__row"><dt>network</dt><dd>never required</dd></div>
         </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section section--alt" id="faq">
+    <div class="wrap wrap--narrow">
+      <header class="section__head reveal">
+        <p class="eyebrow__mono accent">FAQ</p>
+        <h2 class="section__title">Questions, answered.</h2>
+      </header>
+      <div class="faq reveal">
+        <details class="faq__item">
+          <summary class="faq__q">Is Gapless free?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">Yes. Gapless is free and open-source under the GPL-3.0 license. There is no account to create, no watermark on your exports, and no paid tier.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Does Gapless upload my videos to a server?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">No. Everything runs locally on your own machine. Your files never leave your device and no network connection is required, even for the first launch.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">How does Gapless remove silence from a video?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">Gapless scans the audio and proposes a cut wherever the sound drops below a threshold you set. Every proposed cut appears on a visual timeline, so you can review them, keep any you want, and export a tighter MP4.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">How is Gapless different from auto-editor?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">Gapless is the visual interface for the auto-editor engine, which it bundles in, version-pinned and checksum-verified. You get a timeline to review and adjust every cut, with no Python to install and no command line to learn.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Does Gapless change my original file?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">No. The edit is completely non-destructive. Your original file stays read-only and Gapless writes the result to a separate MP4 that matches exactly what the Edited preview showed.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">What operating systems does Gapless support?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">Gapless runs on macOS 12 or later, on both Apple Silicon and Intel Macs. Windows and Linux versions are coming soon.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Can I keep pauses I want instead of cutting everything?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <p class="faq__a">Yes. Click any proposed cut to restore that section, adjust the margin kept on both sides of every cut, or switch from cutting to fast-forwarding, which plays silent stretches at 8× instead of removing them.</p>
+        </details>
       </div>
     </div>
   </section>
