@@ -1,6 +1,6 @@
 # Gapless — marketing site
 
-Static landing page for [Gapless](https://github.com/navnit/gapless), the
+Static landing page for [Gapless](https://github.com/navnit/gapless-app), the
 free and open-source desktop interface for
 [auto-editor](https://github.com/WyattBlue/auto-editor). It implements the
 "Gapless Website v2" design (warm editorial/utilitarian, waveform data-viz
