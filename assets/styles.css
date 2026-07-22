@@ -439,9 +439,12 @@ code, .mono { font-family: var(--font-mono); }
 .footer__brand { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .footer__meta { font-size: 0.76rem; color: var(--dim); }
 .footer__meta b { color: color-mix(in srgb, var(--dim) 55%, transparent); font-weight: 400; margin-inline: 0.1rem; }
-.footer__links { display: flex; gap: 1.4rem; }
+.footer__links { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
 .footer__links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
 .footer__links a:hover { color: var(--text); }
+.footer__links .footer__me { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); }
+.footer__links .footer__me:hover { color: var(--accent-hover); }
+.footer__me svg { width: 15px; height: 15px; }
 
 /* ============================================================
    Reveal animation
@@ -480,9 +483,9 @@ code, .mono { font-family: var(--font-mono); }
   .results { grid-template-columns: 1fr; }
   .grid3 { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; gap: 1.6rem; }
-  .feature { flex-direction: column; align-items: stretch; gap: 1.6rem; }
+  .feature { flex-direction: column; align-items: stretch; gap: 0.9rem; padding-block: clamp(1.75rem, 6vw, 2.5rem); }
   .feature--rev { flex-direction: column; }
-  .viz { width: 100%; }
+  .viz { width: 100%; padding: 1.15rem; }
 }
 
 @media (max-width: 620px) {
