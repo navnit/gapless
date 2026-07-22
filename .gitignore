@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Editor / tooling scratch
+.remember/
+.tokensave/
+
+# Logs
+*.log

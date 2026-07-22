@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gapless — The visual interface for auto-editor</title>
+<meta name="description" content="Gapless scans your video for silence and proposes every cut on a visual timeline. Review them, restore any you want to keep, export a tighter MP4. Free, open-source, and fully local." />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f7f3ec" media="(prefers-color-scheme: light)" />
+<link rel="canonical" href="https://navnit.me/gapless" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Gapless — The visual interface for auto-editor" />
+<meta property="og:description" content="Your recording is great. The pauses aren't. Find silence, review the cuts, export a tighter MP4 — free, open-source, fully local." />
+<meta property="og:url" content="https://navnit.me/gapless" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+<script>
+  // Set theme before first paint to avoid a flash of the wrong theme.
+  (function () {
+    try {
+      var stored = localStorage.getItem('gapless-theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="top">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top" aria-label="Gapless home">
+      <span class="mark" aria-hidden="true"><i></i><i></i></span>
+      <span class="brand__name">Gapless</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#use-cases">Use cases</a>
+      <a href="https://github.com/navnit/gapless" target="_blank" rel="noopener">GitHub <span class="ext" aria-hidden="true">↗</span></a>
+    </nav>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light theme" title="Toggle theme">
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g class="rays"><line x1="12" y1="2" x2="12" y2="4.6"/><line x1="12" y1="19.4" x2="12" y2="22"/><line x1="2" y1="12" x2="4.6" y2="12"/><line x1="19.4" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <a class="btn btn--primary btn--sm" href="https://github.com/navnit/gapless/releases/latest" target="_blank" rel="noopener">Download</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">
+        <span class="pill">Free &amp; open-source</span>
+        <span class="eyebrow__mono">The visual interface for auto-editor</span>
+      </p>
+      <h1 class="hero__title reveal">Your recording is great.<br />The pauses aren't.</h1>
+      <p class="hero__sub reveal">Gapless scans your video for silence — thinking pauses, waiting on a progress bar, dead air between sentences — and proposes every cut on a visual timeline. Review them, restore any you want to keep, export.</p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary" href="https://github.com/navnit/gapless/releases/latest" target="_blank" rel="noopener">Download for macOS</a>
+        <a class="btn btn--ghost" href="#download">Windows &amp; Linux — coming soon</a>
+      </div>
+      <p class="hero__meta mono reveal">v0.1.0 <b>·</b> macOS 12+ <b>·</b> Apple Silicon &amp; Intel <b>·</b> No account <b>·</b> Fully local — your files never leave your device</p>
+
+      <!-- App mock -->
+      <div class="app reveal" role="img" aria-label="The Gapless desktop app showing a video with proposed silence cuts on a waveform timeline.">
+        <div class="app__titlebar">
+          <span class="brand brand--sm"><span class="mark" aria-hidden="true"><i></i><i></i></span><span class="brand__name">Gapless</span></span>
+          <span class="app__dots" aria-hidden="true"><b class="win-min"></b><b class="win-max"></b><b class="win-close"></b></span>
+        </div>
+        <div class="app__toolbar">
+          <button class="chip" type="button" tabindex="-1">Open…</button>
+          <span class="app__file"><b>weekly-sync.mp4</b><span class="mono app__fileMeta">1080p · 29.97 fps · 22:14</span></span>
+          <span class="seg" role="group" aria-label="Preview">
+            <button class="seg__btn" type="button" tabindex="-1">Original</button>
+            <button class="seg__btn is-active" type="button" tabindex="-1">Edited</button>
+          </span>
+          <button class="chip chip--accent" type="button" tabindex="-1">Export…</button>
+        </div>
+        <div class="app__body">
+          <aside class="app__panel">
+            <div class="ctl">
+              <span class="ctl__label mono">Edit by</span>
+              <span class="seg seg--full">
+                <button class="seg__btn is-active" type="button" tabindex="-1">Audio</button>
+                <button class="seg__btn" type="button" tabindex="-1">Motion</button>
+              </span>
+            </div>
+            <div class="ctl">
+              <span class="ctl__row"><span class="ctl__label mono">Threshold</span><span class="ctl__val mono">−19 dB</span></span>
+              <span class="slider" aria-hidden="true"><span class="slider__fill"></span><span class="slider__knob"></span></span>
+            </div>
+            <div class="ctl">
+              <span class="ctl__label mono">Margin</span>
+              <span class="ctl__pair"><span class="field mono">0.2s</span><span class="field mono">0.2s</span></span>
+            </div>
+            <div class="ctl">
+              <span class="ctl__label mono">Silence</span>
+              <span class="seg seg--full">
+                <button class="seg__btn is-active" type="button" tabindex="-1">Cut out</button>
+                <button class="seg__btn" type="button" tabindex="-1">Fast-fwd</button>
+              </span>
+            </div>
+          </aside>
+          <div class="app__stage">
+            <span class="badge">Edited</span>
+            <span class="play" aria-hidden="true"></span>
+            <span class="app__time mono">▶ 04:12 / 09:40</span>
+          </div>
+        </div>
+        <div class="app__timeline">
+          <div class="wave" data-wave="hero" aria-hidden="true"></div>
+          <div class="app__timelineFoot mono"><span>38 cuts proposed <b>·</b> 22:14</span><span class="app__saved">Saved</span></div>
+        </div>
+      </div>
+
+      <!-- Result cards -->
+      <div class="results reveal">
+        <article class="result">
+          <p class="result__file mono">weekly-sync.mp4</p>
+          <p class="result__time"><span>22:14</span> <span class="arrow" aria-hidden="true">→</span> <span class="result__out">9:40</span></p>
+          <p class="result__note">57% was waiting and dead air</p>
+        </article>
+        <article class="result">
+          <p class="result__file mono">setup-tutorial.mp4</p>
+          <p class="result__time"><span>14:32</span> <span class="arrow" aria-hidden="true">→</span> <span class="result__out">11:05</span></p>
+          <p class="result__note">Pauses between sentences, trimmed</p>
+        </article>
+        <article class="result">
+          <p class="result__file mono">ep-41-interview.mp4</p>
+          <p class="result__time"><span>58:20</span> <span class="arrow" aria-hidden="true">→</span> <span class="result__out">46:41</span></p>
+          <p class="result__note">Long pauses tightened, no words touched</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <header class="section__head reveal">
+        <p class="eyebrow__mono accent">How it works</p>
+        <h2 class="section__title">Open. Tune. Export.</h2>
+      </header>
+      <ol class="steps">
+        <li class="step reveal">
+          <p class="step__num mono">1 — Open</p>
+          <p class="step__body">Drop in a local video. One screen, no timeline to build — your project autosaves as you work, and your original file stays read-only.</p>
+        </li>
+        <li class="step reveal">
+          <p class="step__num mono">2 — Tune</p>
+          <p class="step__body">Drag the threshold; every proposed cut updates live on the timeline. Click any hatched cut to keep that section. Your original file is never modified.</p>
+        </li>
+        <li class="step reveal">
+          <p class="step__num mono">3 — Export</p>
+          <p class="step__body">Render a finished MP4 that matches exactly what the Edited preview showed — nothing more to configure.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ USE CASES ============ -->
+  <section class="section section--alt" id="use-cases">
+    <div class="wrap">
+      <header class="section__head reveal">
+        <p class="eyebrow__mono accent">Use cases</p>
+        <h2 class="section__title">Silence hides everywhere.</h2>
+      </header>
+
+      <div class="feature reveal">
+        <div class="feature__text">
+          <p class="feature__kicker mono">01 · Meetings &amp; demos</p>
+          <h3 class="feature__title">The demo worked. The waiting didn't.</h3>
+          <p class="feature__body">Screen shares booting, apps processing, "can everyone see my screen?" — recorded meetings are full of dead stretches. Gapless finds each quiet stretch and closes it, so the recording you share is just the demo.</p>
+        </div>
+        <figure class="viz">
+          <div class="wave wave--sm" data-wave="meetings" aria-hidden="true"></div>
+          <figcaption class="viz__foot mono"><span>weekly-sync.mp4</span><span><span class="dim">22:14</span> → <span class="accent">9:40</span></span></figcaption>
+        </figure>
+      </div>
+
+      <div class="feature feature--rev reveal">
+        <div class="feature__text">
+          <p class="feature__kicker mono">02 · Screencasts &amp; tutorials</p>
+          <h3 class="feature__title">Narrate at your own pace.</h3>
+          <p class="feature__body">Pause between sentences. Check your notes. Re-find your cursor. Record naturally — then set the threshold and everything quieter than it gets trimmed, with a margin around every cut so the edit breathes.</p>
+        </div>
+        <figure class="viz">
+          <div class="wave wave--sm wave--threshold" data-wave="tutorial" aria-hidden="true">
+            <span class="wave__thresholdLabel mono">cut below <b class="accent">−19 dB</b></span>
+          </div>
+          <figcaption class="viz__foot mono"><span>setup-tutorial.mp4</span><span><span class="dim">14:32</span> → <span class="accent">11:05</span></span></figcaption>
+        </figure>
+      </div>
+
+      <div class="feature reveal">
+        <div class="feature__text">
+          <p class="feature__kicker mono">03 · Podcasts &amp; interviews</p>
+          <h3 class="feature__title">Keep the conversation. Lose the lag.</h3>
+          <p class="feature__body">Guests think before they answer — sometimes for a while. Gapless tightens long pauses to a natural beat without touching a single word, keeping a sliver of silence on each side so it never sounds clipped.</p>
+        </div>
+        <figure class="viz">
+          <div class="convo" aria-hidden="true">
+            <span class="convo__bubble">YOU</span>
+            <span class="convo__gap"></span>
+            <span class="convo__bubble">GUEST</span>
+            <span class="convo__gap"></span>
+            <span class="convo__bubble">YOU</span>
+            <span class="convo__gap"></span>
+            <span class="convo__bubble">GUEST</span>
+          </div>
+          <figcaption class="viz__foot mono"><span>ep-41-interview.mp4 <b>·</b> <span class="accent">amber ticks</span> = kept margin</span><span><span class="dim">58:20</span> → <span class="accent">46:41</span></span></figcaption>
+        </figure>
+      </div>
+
+      <div class="feature feature--rev reveal">
+        <div class="feature__text">
+          <p class="feature__kicker mono">04 · Lectures &amp; talks</p>
+          <h3 class="feature__title">Don't cut. Fast-forward.</h3>
+          <p class="feature__body">Sometimes silence is context — writing on a whiteboard, a class working through a problem. Switch from cutting to fast-forwarding and quiet stretches play at 8× instead of disappearing. Nothing is lost, just compressed.</p>
+        </div>
+        <figure class="viz">
+          <div class="ffwd" aria-hidden="true">
+            <span class="ffwd__seg"></span>
+            <span class="ffwd__seg ffwd__seg--fast"><b class="mono">8×</b></span>
+            <span class="ffwd__seg"></span>
+            <span class="ffwd__seg ffwd__seg--fast"><b class="mono">8×</b></span>
+            <span class="ffwd__seg"></span>
+            <span class="ffwd__playhead"></span>
+          </div>
+          <figcaption class="viz__foot mono"><span>lecture-week-6.mp4 <b>·</b> nothing deleted</span><span><span class="dim">52:00</span> → <span class="accent">33:15</span></span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY GAPLESS ============ -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <header class="section__head reveal">
+        <p class="eyebrow__mono accent">Why Gapless</p>
+        <h2 class="section__title">Automatic, but never out of your hands.</h2>
+      </header>
+      <div class="grid3">
+        <article class="card reveal">
+          <h3 class="card__title">Review every cut</h3>
+          <p class="card__body">Every proposed cut is visible on the timeline before you export — nothing disappears without you seeing it.</p>
+        </article>
+        <article class="card reveal">
+          <h3 class="card__title">Restore any section</h3>
+          <p class="card__body">A dramatic pause worth keeping? Click the cut to put it back. The edit is non-destructive; your original file is untouched.</p>
+        </article>
+        <article class="card reveal">
+          <h3 class="card__title">Fast-forward instead of deleting</h3>
+          <p class="card__body">When silence is context, compress it to 8× instead of removing it. Nothing is lost.</p>
+        </article>
+        <article class="card reveal">
+          <h3 class="card__title">Natural speech margins</h3>
+          <p class="card__body">A configurable margin stays on both sides of every cut, so sentences never sound clipped.</p>
+        </article>
+        <article class="card reveal">
+          <h3 class="card__title">Autosaved projects</h3>
+          <p class="card__body">Every change autosaves to a small <code>.gapless</code> project file — close the app mid-edit, reopen, and your cuts and overrides are exactly where you left them.</p>
+        </article>
+        <article class="card reveal">
+          <h3 class="card__title">Fully local</h3>
+          <p class="card__body">Everything runs on your machine. No upload, no account, no watermark — your recordings stay yours.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORIGIN STORY ============ -->
+  <section class="section section--alt" id="story">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow__mono accent reveal">Why Gapless exists</p>
+      <blockquote class="story reveal">
+        I was demoing our product on a call. Every time I clicked <span class="accent">Run</span>, everyone sat and watched a progress bar crawl. The recording came out 22 minutes long — for about nine minutes of actual demo. Cutting the waiting out by hand took longer than the meeting itself.
+      </blockquote>
+      <p class="story__foot reveal">Gapless is the tool I wanted that afternoon: open the recording, review the cuts, keep the nine minutes that matter. It's free, open-source, and built as the visual interface for the excellent <a href="https://github.com/WyattBlue/auto-editor" target="_blank" rel="noopener">auto-editor</a> engine.</p>
+    </div>
+  </section>
+
+  <!-- ============ UNDER THE HOOD ============ -->
+  <section class="section" id="hood">
+    <div class="wrap hood">
+      <div class="hood__text reveal">
+        <p class="eyebrow__mono accent">Under the hood</p>
+        <h2 class="section__title">Auto-editor, batteries included.</h2>
+        <p class="hood__body">Gapless ships with the excellent <a href="https://github.com/WyattBlue/auto-editor" target="_blank" rel="noopener">auto-editor</a> engine bundled inside — version-pinned and checksum-verified. No Python to install, no command line to learn, no network needed: install the app and edit, fully offline.</p>
+      </div>
+      <div class="spec reveal">
+        <dl class="spec__list mono">
+          <div class="spec__row"><dt>engine</dt><dd>auto-editor 31.2.0</dd></div>
+          <div class="spec__row"><dt>checksum</dt><dd class="accent">sha-256 verified ✓</dd></div>
+          <div class="spec__row"><dt>dependencies</dt><dd>none — bundled</dd></div>
+          <div class="spec__row"><dt>network</dt><dd>never required</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA / DOWNLOAD ============ -->
+  <section class="cta" id="download">
+    <div class="wrap wrap--narrow cta__inner">
+      <h2 class="cta__title reveal">Stop scrubbing for silence.</h2>
+      <p class="cta__sub reveal">Free and open-source, forever.</p>
+      <div class="cta__row reveal">
+        <a class="btn btn--primary btn--lg" href="https://github.com/navnit/gapless/releases/latest" target="_blank" rel="noopener">Download DMG for macOS</a>
+        <div class="brew" data-copy="brew install --cask navnit/gapless/gapless">
+          <code class="brew__cmd mono"><span class="brew__prompt">$</span> brew install --cask navnit/gapless/gapless</code>
+          <button class="brew__copy" id="brewCopy" type="button" aria-label="Copy Homebrew install command">Copy</button>
+        </div>
+      </div>
+      <p class="cta__meta mono reveal">v0.1.0 <b>·</b> macOS 12+ <b>·</b> Apple Silicon &amp; Intel <b>·</b> SHA-256 verified</p>
+      <p class="cta__gatekeeper reveal">First launch of the DMG: Gapless isn't notarized by Apple yet, so approve it once via System Settings → Privacy &amp; Security → <b>Open Anyway</b>. Homebrew installs open without a prompt.</p>
+      <div class="cta__soon reveal">
+        <span class="soon-pill">Windows — coming soon</span>
+        <span class="soon-pill">Linux — coming soon</span>
+        <a class="watch" href="https://github.com/navnit/gapless/releases" target="_blank" rel="noopener">Watch releases to get notified <span class="ext" aria-hidden="true">↗</span></a>
+      </div>
+      <a class="cta__star" href="https://github.com/navnit/gapless" target="_blank" rel="noopener">Star on GitHub <span class="ext" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <span class="brand brand--sm"><span class="mark" aria-hidden="true"><i></i><i></i></span><span class="brand__name">Gapless</span></span>
+      <span class="footer__meta mono">The visual interface for auto-editor <b>·</b> GPL-3.0 <b>·</b> © 2026</span>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="https://github.com/navnit/gapless" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/navnit/gapless/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/WyattBlue/auto-editor" target="_blank" rel="noopener">auto-editor</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
