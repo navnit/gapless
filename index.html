@@ -52,7 +52,7 @@
         <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g class="rays"><line x1="12" y1="2" x2="12" y2="4.6"/><line x1="12" y1="19.4" x2="12" y2="22"/><line x1="2" y1="12" x2="4.6" y2="12"/><line x1="19.4" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
         <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z"/></svg>
       </button>
-      <a class="btn btn--primary btn--sm" href="https://github.com/navnit/gapless-app/releases/latest" target="_blank" rel="noopener">Download</a>
+      <a class="btn btn--primary btn--sm js-download" href="https://github.com/navnit/gapless-app/releases/latest" rel="noopener">Download</a>
     </div>
   </div>
 </header>
@@ -69,10 +69,15 @@
       <h1 class="hero__title reveal">Your recording is great.<br />The pauses aren't.</h1>
       <p class="hero__sub reveal">Gapless scans your video for silence — thinking pauses, waiting on a progress bar, dead air between sentences — and proposes every cut on a visual timeline. Review them, restore any you want to keep, export.</p>
       <div class="hero__cta reveal">
-        <a class="btn btn--primary" href="https://github.com/navnit/gapless-app/releases/latest" target="_blank" rel="noopener">Download for macOS</a>
+        <a class="btn btn--primary js-download" href="https://github.com/navnit/gapless-app/releases/latest" rel="noopener">Download for macOS</a>
         <a class="btn btn--ghost" href="#download">Windows &amp; Linux — coming soon</a>
       </div>
-      <p class="hero__meta mono reveal">v0.1.0 <b>·</b> macOS 12+ <b>·</b> Apple Silicon &amp; Intel <b>·</b> No account <b>·</b> Fully local — your files never leave your device</p>
+      <p class="hero__dl-hint reveal">
+        <span class="js-dl-arch" hidden></span>
+        <a class="js-dl-alt" href="#download" rel="noopener" hidden></a>
+        <a class="dl-brew" href="#download">Install with Homebrew</a>
+      </p>
+      <p class="hero__meta mono reveal"><span class="js-version">v0.1.0</span> <b>·</b> macOS 12+ <b>·</b> Apple Silicon &amp; Intel <b>·</b> No account <b>·</b> Fully local — your files never leave your device</p>
 
       <!-- App mock -->
       <div class="app reveal" role="img" aria-label="The Gapless desktop app showing a video with proposed silence cuts on a waveform timeline.">
@@ -318,13 +323,13 @@
       <h2 class="cta__title reveal">Stop scrubbing for silence.</h2>
       <p class="cta__sub reveal">Free and open-source, forever.</p>
       <div class="cta__row reveal">
-        <a class="btn btn--primary btn--lg" href="https://github.com/navnit/gapless-app/releases/latest" target="_blank" rel="noopener">Download DMG for macOS</a>
+        <a class="btn btn--primary btn--lg js-download" href="https://github.com/navnit/gapless-app/releases/latest" rel="noopener">Download DMG for macOS</a>
         <div class="brew" data-copy="brew install --cask navnit/gapless/gapless">
           <code class="brew__cmd mono"><span class="brew__prompt">$</span> brew install --cask navnit/gapless/gapless</code>
           <button class="brew__copy" id="brewCopy" type="button" aria-label="Copy Homebrew install command">Copy</button>
         </div>
       </div>
-      <p class="cta__meta mono reveal">v0.1.0 <b>·</b> macOS 12+ <b>·</b> Apple Silicon &amp; Intel <b>·</b> SHA-256 verified</p>
+      <p class="cta__meta mono reveal"><span class="js-version">v0.1.0</span> <b>·</b> macOS 12+ <b>·</b> Apple Silicon &amp; Intel <b>·</b> SHA-256 verified</p>
       <p class="cta__gatekeeper reveal">First launch of the DMG: Gapless isn't notarized by Apple yet, so approve it once via System Settings → Privacy &amp; Security → <b>Open Anyway</b>. Homebrew installs open without a prompt.</p>
       <div class="cta__soon reveal">
         <span class="soon-pill">Windows — coming soon</span>
