@@ -5,18 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Gapless: the visual interface for auto-editor</title>
 <meta name="description" content="Gapless scans your video for silence and proposes every cut on a visual timeline. Review them, restore any you want to keep, export a tighter MP4. Free, open-source, and fully local." />
+<meta name="author" content="Navnit Durai" />
 <meta name="color-scheme" content="dark light" />
 <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f7f3ec" media="(prefers-color-scheme: light)" />
-<link rel="canonical" href="https://navnit.me/gapless" />
+<link rel="canonical" href="https://navnit.me/gapless/" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="Gapless" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Gapless: the visual interface for auto-editor" />
 <meta property="og:description" content="Your recording is great. The pauses aren't. Find the silence, review the cuts, and export a tighter MP4. Free, open source, and fully local." />
-<meta property="og:url" content="https://navnit.me/gapless" />
+<meta property="og:url" content="https://navnit.me/gapless/" />
+<meta property="og:image" content="https://navnit.me/gapless/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Gapless — the visual interface for auto-editor. A video with proposed silence cuts on a waveform timeline." />
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Gapless: the visual interface for auto-editor" />
+<meta name="twitter:description" content="Your recording is great. The pauses aren't. Find the silence, review the cuts, and export a tighter MP4. Free, open source, and fully local." />
+<meta name="twitter:image" content="https://navnit.me/gapless/assets/og-image.png" />
+<meta name="twitter:image:alt" content="Gapless — the visual interface for auto-editor. A video with proposed silence cuts on a waveform timeline." />
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -30,6 +45,42 @@
       document.documentElement.setAttribute('data-theme', theme);
     } catch (e) {}
   })();
+</script>
+
+<!-- Structured data: software product (no fabricated ratings; version is served live) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Gapless",
+  "alternateName": "Gapless — the visual interface for auto-editor",
+  "url": "https://navnit.me/gapless/",
+  "description": "Gapless scans your video for silence and proposes every cut on a visual timeline. Review them, restore any you want to keep, and export a tighter MP4. Free, open-source, and fully local.",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "Video Editor",
+  "operatingSystem": "macOS 12+",
+  "processorRequirements": "Apple Silicon or Intel",
+  "downloadUrl": "https://github.com/navnit/gapless-app/releases/latest",
+  "softwareHelp": "https://github.com/navnit/gapless-app",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "isAccessibleForFree": true,
+  "image": "https://navnit.me/gapless/assets/og-image.png",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Navnit Durai",
+    "url": "https://navnit.me"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Navnit Durai",
+    "url": "https://navnit.me"
+  }
+}
 </script>
 </head>
 <body>
